@@ -1,13 +1,15 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
 
 import 'dart:convert';
-import 'dart:js' as js;
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:logging/logging.dart';
 import 'package:websafe_svg/src/platform/browser/browser_svg_loader.dart';
+import 'package:websafe_svg/src/platform/browser/js_dummy.dart'
+    if (dart.library.html) 'dart:js'
+    if (dart.library.js_interop) 'dart:js_interop' as js;
 
 class BrowserSvg extends StatefulWidget {
   const BrowserSvg({
@@ -100,9 +102,7 @@ class _BrowserSvgState extends State<BrowserSvg> {
   }
 
   Widget _buildPlaceholder(BuildContext context) =>
-      widget.placeholderBuilder == null
-          ? const SizedBox()
-          : Builder(builder: widget.placeholderBuilder!);
+      widget.placeholderBuilder == null ? const SizedBox() : Builder(builder: widget.placeholderBuilder!);
 
   @override
   Widget build(BuildContext context) {
