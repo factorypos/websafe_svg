@@ -7,9 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:logging/logging.dart';
 import 'package:websafe_svg/src/platform/browser/browser_svg_loader.dart';
-import 'package:websafe_svg/src/platform/browser/js_dummy.dart'
-    if (dart.library.html) 'dart:js'
-    if (dart.library.js_interop) 'dart:js_interop' as js;
+import 'package:websafe_svg/src/platform/browser/canvaskit_stub.dart' if (dart.library.html) 'canvaskit_web.dart' as c_kit;
 
 class BrowserSvg extends StatefulWidget {
   const BrowserSvg({
@@ -55,7 +53,7 @@ class _BrowserSvgState extends State<BrowserSvg> {
   Uint8List? _imageBytes;
   late BrowserSvgLoader _loader;
 
-  bool get rendererCanvasKit => js.context['flutterCanvasKit'] != null;
+  bool get rendererCanvasKit => c_kit.rendererCanvasKit;
 
   @override
   void initState() {
