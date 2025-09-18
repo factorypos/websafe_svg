@@ -1,1 +1,3 @@
-bool get rendererCanvasKit => false;
+const isRunningWithWasm = bool.fromEnvironment('dart.tool.dart2wasm');
+
+bool get rendererCanvasKit => isRunningWithWasm;
